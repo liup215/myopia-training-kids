@@ -435,6 +435,8 @@ body {
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
   font-family: var(--font-main);
+  touch-action: manipulation;
+  min-height: 44px;
 }
 
 .btn-check {
@@ -605,6 +607,7 @@ body {
   transition: transform 0.12s, box-shadow 0.12s;
   box-shadow: 0 8px 28px rgba(0,0,0,0.18);
   color: #fff;
+  touch-action: manipulation;
 }
 
 .btn-session:hover:not(:disabled)  { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.22); }
@@ -632,16 +635,6 @@ body {
   font-weight: 700;
   color: var(--success);
   min-height: 1.6rem;
-}
-
-
-  background: linear-gradient(135deg, #FFF3CD, #FFEAA7);
-  padding: 18px 32px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  border-bottom: 2px solid #FFEAA7;
-  flex-wrap: wrap;
 }
 
 .btn-start-quiz {
@@ -854,6 +847,8 @@ body.quiz-open { overflow: hidden; }
   box-shadow: 0 6px 20px rgba(40,167,69,0.35);
   transition: transform 0.1s, box-shadow 0.1s;
   margin-top: 18px;
+  touch-action: manipulation;
+  min-height: 56px;
 }
 
 .quiz-btn-check:hover  { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(40,167,69,0.45); }
@@ -971,18 +966,104 @@ body.quiz-open { overflow: hidden; }
 }
 
 /* ---- Responsive ---- */
+
+/* Mobile (≤600px) */
 @media (max-width: 600px) {
   html { font-size: 16px; }
-  .app-header { padding: 16px 20px; }
-  .app-title  { font-size: 1.5rem; }
-  .app-main   { padding: 0 12px 32px; }
-  .problems-grid { grid-template-columns: repeat(2, 1fr); }
-  .timer-display { font-size: 3rem; }
-  .progress-section { padding: 14px 20px; }
+  .app-header { padding: 12px 16px; gap: 8px; }
+  .app-title  { font-size: 1.4rem; }
+  .app-subtitle { font-size: 0.85rem; }
+  #date-display { font-size: 0.9rem; padding: 4px 10px; }
+  .app-main   { padding: 0 10px 28px; }
+  .progress-section { padding: 12px 16px; gap: 12px; }
+  #progress-label { min-width: unset; font-size: 0.9rem; }
+  .problems-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .timer-display { font-size: 2.8rem; }
+  .btn-session { font-size: 1.8rem; padding: 28px 20px; }
+  .period-title { font-size: 1.3rem; }
+  .task-name { font-size: 1.1rem; }
+  /* Quiz overlay on mobile */
+  #quiz-card-container { padding: 12px 10px 20px; }
+  .quiz-card { padding: 22px 18px; border-radius: 20px; }
+  .quiz-math-vertical { font-size: 2.2rem; padding: 14px 16px; max-width: 100%; }
+  .quiz-math-input { font-size: 2.2rem; }
+  .quiz-btn-check { font-size: 1.1rem; padding: 14px; }
+  .quiz-feedback { font-size: 1.1rem; }
+  .quiz-en-line { font-size: 1.1rem; }
+  .quiz-zh-line { font-size: 1.2rem; }
+  .quiz-article-title { font-size: 1.3rem; }
+  .quiz-comp-question { font-size: 1rem; }
+  .quiz-comp-answer { font-size: 1rem; }
+  .quiz-complete-title { font-size: 1.8rem; }
+  .quiz-complete-icon { font-size: 3.5rem; }
+  .quiz-close-btn { font-size: 0.85rem; padding: 6px 12px; }
+  #quiz-progress-text { font-size: 0.9rem; }
 }
 
+/* Tablet (601px – 1023px) */
+@media (min-width: 601px) and (max-width: 1023px) {
+  html { font-size: 17px; }
+  .app-main { max-width: 800px; padding: 0 16px 36px; }
+  .progress-section { padding: 16px 24px; }
+  .problems-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+  .btn-session { font-size: 2rem; padding: 32px 24px; }
+  .quiz-card { padding: 30px 36px; }
+  .quiz-math-vertical { font-size: 2.8rem; max-width: 300px; }
+  .quiz-math-input { font-size: 2.8rem; }
+  .quiz-btn-check { font-size: 1.2rem; }
+}
+
+/* Desktop / standard large (≥1200px) */
 @media (min-width: 1200px) {
   html { font-size: 20px; }
   .app-main { max-width: 1100px; }
   .problems-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+}
+
+/* Extra-large TV / 一体机 (≥1400px) */
+@media (min-width: 1400px) {
+  html { font-size: 22px; }
+  .app-main { max-width: 1240px; }
+  .app-title { font-size: 2.4rem; }
+  .btn-session { font-size: 2.8rem; padding: 48px 40px; border-radius: 32px; }
+  #session-buttons { gap: 48px; padding: 60px 24px; }
+  .session-card { max-width: 560px; }
+  #quiz-card-container { max-width: 960px; padding: 32px 24px 48px; }
+  .quiz-card { padding: 60px 80px; }
+  .quiz-math-vertical { font-size: 5rem; max-width: 440px; }
+  .quiz-math-input { font-size: 5rem; }
+  .quiz-feedback { font-size: 1.8rem; }
+  .quiz-btn-check { font-size: 1.6rem; padding: 22px; }
+  .quiz-en-line { font-size: 1.7rem; }
+  .quiz-zh-line { font-size: 1.9rem; }
+  .quiz-article-title { font-size: 2.2rem; }
+  .quiz-comp-question { font-size: 1.5rem; }
+  .quiz-comp-answer { font-size: 1.4rem; }
+  .quiz-complete-title { font-size: 2.8rem; }
+  .quiz-complete-icon { font-size: 6rem; }
+}
+
+/* Landscape on small devices (phones turned sideways) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-header { padding: 8px 16px; }
+  .app-title  { font-size: 1.2rem; }
+  .app-subtitle { display: none; }
+  #session-buttons { flex-direction: row; gap: 20px; padding: 16px 20px; }
+  .session-card { flex: 1; max-width: none; }
+  .btn-session { padding: 20px 16px; font-size: 1.6rem; }
+  .quiz-header { padding: 8px 16px; }
+  #quiz-card-container { padding: 10px 12px 16px; }
+  .quiz-card { padding: 16px 24px; }
+  .quiz-math-vertical { font-size: 2rem; max-width: 240px; padding: 10px 14px; }
+  .quiz-math-input { font-size: 2rem; }
+  .quiz-btn-check { padding: 12px; font-size: 1rem; margin-top: 10px; }
+  .quiz-feedback { font-size: 1rem; padding: 10px 14px; }
+  .timer-display { font-size: 2.4rem; }
+  .progress-section { padding: 8px 16px; }
+}
+
+/* Portrait tablet — fill more screen vertically */
+@media (orientation: portrait) and (min-width: 601px) and (max-width: 1023px) {
+  #session-buttons { padding: 56px 20px; gap: 44px; }
+  .btn-session { padding: 44px 28px; font-size: 2.4rem; }
 }
