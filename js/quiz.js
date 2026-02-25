@@ -10,6 +10,8 @@ const QuizModule = (() => {
   let mathTaskCorrect = {};   // taskId -> # problems answered correctly this session
   let slideRetries = {};      // slideIndex -> # wrong attempts
   let timerIntervals = {};    // taskId -> intervalId
+  let slideQAnswered = {};    // idx -> # questions answered on this slide
+  let slideTotalQ = {};       // idx -> total questions for this slide
 
   // ---- Build flat slides array from tasks data ----
 
@@ -49,6 +51,8 @@ const QuizModule = (() => {
     mathTaskCorrect = {};
     slideRetries = {};
     timerIntervals = {};
+    slideQAnswered = {};
+    slideTotalQ = {};
   }
 
   function open() {
@@ -214,6 +218,37 @@ const QuizModule = (() => {
     }
   }
 
+  // ---- Reading slide helpers ----
+
+  function buildQuestionList(article) {
+    return [
+      { type: 'comprehension', prompt: article.question, options: article.options, correctIndex: article.correctIndex },
+      ...(article.extraQuestions || [])
+    ];
+  }
+
+  function renderQuestionHTML(q, idx, qIdx) {
+    const icons = { comprehension: '❓', typo: '✏️', vocab: '📚', grammar: '📝' };
+    const icon = icons[q.type] || '❓';
+    const optionsHTML = (q.options || []).map((opt, i) =>
+      `<button class="quiz-mcq-btn" id="quiz-mcq-${idx}-${qIdx}-${i}"
+        onclick="QuizModule.selectMCQQuestion(${idx}, ${qIdx}, ${i})">${String.fromCharCode(65 + i)}. ${opt}</button>`
+    ).join('');
+    const noteHTML = q.note
+      ? `<div class="quiz-mcq-note hidden" id="quiz-note-${idx}-${qIdx}">${q.note}</div>`
+      : '';
+    const divider = qIdx > 0 ? '<hr class="quiz-q-divider">' : '';
+    return `
+      ${divider}
+      <div class="quiz-question-section" id="quiz-qsection-${idx}-${qIdx}">
+        <h4 class="quiz-comp-question">${icon} ${q.prompt}</h4>
+        <div class="quiz-mcq-options">${optionsHTML}</div>
+        ${noteHTML}
+        <div id="quiz-feedback-${idx}-${qIdx}" class="quiz-feedback hidden"></div>
+      </div>
+    `;
+  }
+
   // ---- English reading slide ----
 
   function renderEnglishSlide(card, slide, idx) {
@@ -225,11 +260,10 @@ const QuizModule = (() => {
     const lines = article.content
       .map(line => `<p class="quiz-en-line">${line}</p>`)
       .join('');
-    const options = article.options || [];
-    const optionsHTML = options.map((opt, i) =>
-      `<button class="quiz-mcq-btn" id="quiz-mcq-${idx}-${i}"
-        onclick="QuizModule.selectMCQ(${idx}, ${i})">${String.fromCharCode(65 + i)}. ${opt}</button>`
-    ).join('');
+    const allQuestions = buildQuestionList(article);
+    slideTotalQ[idx] = allQuestions.length;
+    slideQAnswered[idx] = 0;
+    const questionsHTML = allQuestions.map((q, qIdx) => renderQuestionHTML(q, idx, qIdx)).join('');
 
     card.innerHTML = `
       <div class="quiz-task-label">${task.icon} ${task.title}</div>
@@ -238,11 +272,7 @@ const QuizModule = (() => {
         <h2 class="quiz-article-title">${article.title}</h2>
       </div>
       <div class="quiz-article-body en-body">${lines}</div>
-      <div class="quiz-comprehension">
-        <h4 class="quiz-comp-question">❓ ${article.question}</h4>
-        <div class="quiz-mcq-options">${optionsHTML}</div>
-      </div>
-      <div id="quiz-feedback-${idx}" class="quiz-feedback hidden"></div>
+      <div class="quiz-comprehension">${questionsHTML}</div>
     `;
   }
 
@@ -257,11 +287,10 @@ const QuizModule = (() => {
     const lines = article.content
       .map(line => `<p class="quiz-zh-line">${line}</p>`)
       .join('');
-    const options = article.options || [];
-    const optionsHTML = options.map((opt, i) =>
-      `<button class="quiz-mcq-btn" id="quiz-mcq-${idx}-${i}"
-        onclick="QuizModule.selectMCQ(${idx}, ${i})">${String.fromCharCode(65 + i)}. ${opt}</button>`
-    ).join('');
+    const allQuestions = buildQuestionList(article);
+    slideTotalQ[idx] = allQuestions.length;
+    slideQAnswered[idx] = 0;
+    const questionsHTML = allQuestions.map((q, qIdx) => renderQuestionHTML(q, idx, qIdx)).join('');
 
     card.innerHTML = `
       <div class="quiz-task-label">${task.icon} ${task.title}</div>
@@ -269,43 +298,63 @@ const QuizModule = (() => {
         <h2 class="quiz-article-title">${article.title}</h2>
       </div>
       <div class="quiz-article-body zh-body">${lines}</div>
-      <div class="quiz-comprehension">
-        <h4 class="quiz-comp-question">❓ ${article.question}</h4>
-        <div class="quiz-mcq-options">${optionsHTML}</div>
-      </div>
-      <div id="quiz-feedback-${idx}" class="quiz-feedback hidden"></div>
+      <div class="quiz-comprehension">${questionsHTML}</div>
     `;
   }
 
-  function selectMCQ(idx, chosenIndex) {
+  function selectMCQQuestion(idx, qIdx, chosenIndex) {
     const slide = slides[idx];
     if (!slide) return;
     const { task, article } = slide;
-    const feedback = document.getElementById(`quiz-feedback-${idx}`);
-    const allBtns = document.querySelectorAll(`[id^="quiz-mcq-${idx}-"]`);
 
+    // Prevent double-answering the same question
+    const section = document.getElementById(`quiz-qsection-${idx}-${qIdx}`);
+    if (!section || section.dataset.answered) return;
+    section.dataset.answered = '1';
+
+    const allQuestions = buildQuestionList(article);
+    const q = allQuestions[qIdx];
+    if (!q) return;
+
+    const allBtns = document.querySelectorAll(`[id^="quiz-mcq-${idx}-${qIdx}-"]`);
     allBtns.forEach(btn => { btn.disabled = true; });
 
-    const correctIndex = article.correctIndex;
+    const correctIndex = q.correctIndex;
     const isCorrect = chosenIndex === correctIndex;
-    const chosenBtn  = document.getElementById(`quiz-mcq-${idx}-${chosenIndex}`);
-    const correctBtn = document.getElementById(`quiz-mcq-${idx}-${correctIndex}`);
+    const isEn = slide.slideType === 'english';
+    const chosenBtn  = document.getElementById(`quiz-mcq-${idx}-${qIdx}-${chosenIndex}`);
+    const correctBtn = document.getElementById(`quiz-mcq-${idx}-${qIdx}-${correctIndex}`);
 
     if (chosenBtn)  chosenBtn.classList.add(isCorrect ? 'mcq-correct' : 'mcq-wrong');
     if (!isCorrect && correctBtn) correctBtn.classList.add('mcq-correct');
 
-    feedback.classList.remove('hidden', 'quiz-correct', 'quiz-wrong');
-    const isEn = slide.slideType === 'english';
-    if (isCorrect) {
-      feedback.textContent = isEn ? '🌟 Great job! That\'s correct!' : '🌟 你真棒！回答正确！';
-      feedback.classList.add('quiz-correct');
-    } else {
-      feedback.textContent = isEn ? '💡 The correct answer is shown in green.' : '💡 正确答案已用绿色显示。';
-      feedback.classList.add('quiz-wrong');
+    // Show typo note after answering
+    const noteEl = document.getElementById(`quiz-note-${idx}-${qIdx}`);
+    if (noteEl) noteEl.classList.remove('hidden');
+
+    const feedback = document.getElementById(`quiz-feedback-${idx}-${qIdx}`);
+    if (feedback) {
+      feedback.classList.remove('hidden', 'quiz-correct', 'quiz-wrong');
+      if (isCorrect) {
+        feedback.textContent = isEn ? '🌟 Great job! That\'s correct!' : '🌟 你真棒！回答正确！';
+        feedback.classList.add('quiz-correct');
+      } else {
+        feedback.textContent = q.type === 'typo'
+          ? '💡 看看下面的解析，下次记住哦！'
+          : isEn ? '💡 The correct answer is shown in green.' : '💡 正确答案已用绿色显示。';
+        feedback.classList.add('quiz-wrong');
+      }
     }
 
-    if (typeof App !== 'undefined') App.completeTask(task.id);
-    setTimeout(() => nextSlide(), 2200);
+    slideQAnswered[idx] = (slideQAnswered[idx] || 0) + 1;
+    if (slideQAnswered[idx] >= (slideTotalQ[idx] || 1)) {
+      if (typeof App !== 'undefined') App.completeTask(task.id);
+      setTimeout(() => nextSlide(), 2200);
+    }
+  }
+
+  function selectMCQ(idx, chosenIndex) {
+    selectMCQQuestion(idx, 0, chosenIndex);
   }
 
   // ---- Outdoor slide ----
@@ -379,5 +428,5 @@ const QuizModule = (() => {
     `;
   }
 
-  return { init, open, close, showSlide, checkMath, selectMCQ, startTimer, nextSlide };
+  return { init, open, close, showSlide, checkMath, selectMCQ, selectMCQQuestion, startTimer, nextSlide };
 })();
