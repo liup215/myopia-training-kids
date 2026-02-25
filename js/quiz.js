@@ -128,24 +128,30 @@ const QuizModule = (() => {
     card.innerHTML = `
       <div class="quiz-task-label">${task.icon} ${task.title} &nbsp;·&nbsp; 第 ${probIdx + 1} / ${totalProbs} 题</div>
       <div class="quiz-math-prompt">算一算：</div>
-      <div class="quiz-math-vertical">
-        <div class="qv-row">${pad(aStr)}</div>
-        <div class="qv-row qv-operator"><span class="qv-sym">${prob.symbol}</span>${pad(bStr).slice(1)}</div>
-        <div class="qv-divider"></div>
-        <div class="qv-row">
-          <input
-            type="number"
-            id="quiz-math-input-${idx}"
-            class="quiz-math-input"
-            placeholder="${'\u00A0'.repeat(width)}"
-            inputmode="numeric"
-            autocomplete="off"
-          />
+      <div class="quiz-math-layout">
+        <div class="quiz-math-left">
+          <div class="quiz-math-vertical">
+            <div class="qv-row">${pad(aStr)}</div>
+            <div class="qv-row qv-operator"><span class="qv-sym">${prob.symbol}</span>${pad(bStr).slice(1)}</div>
+            <div class="qv-divider"></div>
+            <div class="qv-row">
+              <input
+                type="number"
+                id="quiz-math-input-${idx}"
+                class="quiz-math-input"
+                placeholder="${'\u00A0'.repeat(width)}"
+                inputmode="numeric"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="quiz-math-right">
+          <div id="quiz-feedback-${idx}" class="quiz-feedback hidden"></div>
+          <button class="quiz-btn-check" id="quiz-check-btn-${idx}"
+            onclick="QuizModule.checkMath(${idx})">✅ 检查答案</button>
         </div>
       </div>
-      <div id="quiz-feedback-${idx}" class="quiz-feedback hidden"></div>
-      <button class="quiz-btn-check" id="quiz-check-btn-${idx}"
-        onclick="QuizModule.checkMath(${idx})">✅ 检查答案</button>
     `;
 
     card.querySelector(`#quiz-math-input-${idx}`)

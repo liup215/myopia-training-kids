@@ -848,6 +848,19 @@ body.quiz-open { overflow: hidden; }
 .quiz-btn-check:active { transform: translateY(0); }
 .quiz-btn-check:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
 
+/* Math two-column layout */
+.quiz-math-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.quiz-math-right {
+  width: 100%;
+  max-width: 340px;
+}
+
 /* Reading cards */
 .quiz-article-header {
   background: linear-gradient(135deg, var(--secondary) 0%, #2EC4B6 100%);
@@ -954,6 +967,21 @@ body.quiz-open { overflow: hidden; }
   .quiz-article-title { font-size: 2rem; }
   .quiz-comp-question { font-size: 1.4rem; }
   .quiz-comp-answer { font-size: 1.3rem; }
+  /* Two-column layout for math problems */
+  .quiz-math-layout {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+  }
+  .quiz-math-left { flex-shrink: 0; }
+  .quiz-math-right {
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-self: center;
+  }
 }
 
 /* ---- Responsive ---- */
