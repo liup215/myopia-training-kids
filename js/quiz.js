@@ -6,16 +6,18 @@
 const QuizModule = (() => {
   let slides = [];
   let currentIndex = 0;
+  let currentPeriod = null;
   let mathTaskCorrect = {};   // taskId -> # problems answered correctly this session
   let slideRetries = {};      // slideIndex -> # wrong attempts
   let timerIntervals = {};    // taskId -> intervalId
 
   // ---- Build flat slides array from tasks data ----
 
-  function buildSlides(data) {
+  function buildSlides(data, period) {
     const result = [];
-    ['morning', 'evening'].forEach(period => {
-      const periodData = data[period];
+    const periods = period ? [period] : ['morning', 'evening'];
+    periods.forEach(p => {
+      const periodData = data[p];
       if (!periodData) return;
       periodData.tasks.forEach(task => {
         if (task.type === 'math') {
@@ -40,8 +42,9 @@ const QuizModule = (() => {
 
   // ---- Public API ----
 
-  function init(data) {
-    slides = buildSlides(data);
+  function init(data, period) {
+    currentPeriod = period || null;
+    slides = buildSlides(data, period);
     currentIndex = 0;
     mathTaskCorrect = {};
     slideRetries = {};
@@ -365,6 +368,9 @@ const QuizModule = (() => {
   }
 
   function showQuizComplete(container) {
+    if (currentPeriod && typeof App !== 'undefined') {
+      App.markSessionDone(currentPeriod);
+    }
     container.innerHTML = `
       <div class="quiz-card quiz-complete-card">
         <div class="quiz-complete-icon">🎊</div>
