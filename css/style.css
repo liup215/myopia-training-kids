@@ -785,7 +785,7 @@ body.quiz-open { overflow: hidden; }
   border: 3px solid #E9ECEF;
 }
 
-.qv-row { white-space: pre; padding: 4px 0; }
+.qv-row { padding: 4px 0; }
 .qv-sym { color: var(--primary); }
 .qv-divider { border-top: 4px solid var(--text); margin: 10px 0; }
 
@@ -1024,7 +1024,7 @@ body.quiz-open { overflow: hidden; }
   .btn-session { font-size: 2.8rem; padding: 48px 40px; border-radius: 32px; }
   #session-buttons { gap: 48px; padding: 60px 24px; }
   .session-card { max-width: 560px; }
-  #quiz-card-container { max-width: 960px; padding: 32px 24px 48px; }
+  #quiz-card-container { padding: 32px 24px 48px; }
   .quiz-card { padding: 60px 80px; }
   .quiz-math-vertical { font-size: 5rem; max-width: 440px; }
   .quiz-math-input { font-size: 5rem; }
