@@ -13,6 +13,7 @@ const App = (() => {
       const resp = await fetch('data/tasks.json');
       tasksData = await resp.json();
       renderTasks(tasksData);
+      if (typeof QuizModule !== 'undefined') QuizModule.init(tasksData);
       updateProgressBar();
     } catch (e) {
       console.error('Failed to load tasks:', e);
@@ -208,7 +209,13 @@ const App = (() => {
     }
   }
 
-  return { init, completeTask, startTimer };
+  function startQuiz() {
+    if (!tasksData) return;
+    QuizModule.init(tasksData);
+    QuizModule.open();
+  }
+
+  return { init, completeTask, startTimer, startQuiz };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

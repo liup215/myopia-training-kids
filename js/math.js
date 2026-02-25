@@ -157,5 +157,5 @@ const MathModule = (() => {
     if (result) result.classList.add('hidden');
   }
 
-  return { renderMathTask, checkAnswers, resetAnswers };
+  return { renderMathTask, checkAnswers, resetAnswers, generateProblems };
 })();

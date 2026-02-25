@@ -27,6 +27,26 @@
     <div id="stars-display">⭐</div>
   </div>
 
+  <!-- ===== START QUIZ BUTTON ===== -->
+  <div class="quiz-start-section">
+    <button class="btn-start-quiz" onclick="App.startQuiz()">🚀 开始答题</button>
+    <span class="quiz-start-hint">点击开始全屏答题模式</span>
+  </div>
+
+  <!-- ===== QUIZ OVERLAY ===== -->
+  <div id="quiz-overlay" class="hidden">
+    <div class="quiz-header">
+      <button class="quiz-close-btn" onclick="QuizModule.close()">✕ 退出</button>
+      <div class="quiz-progress-wrapper">
+        <span id="quiz-progress-text">第 1 题 / 共 0 题</span>
+        <div class="quiz-progress-track">
+          <div id="quiz-progress-fill"></div>
+        </div>
+      </div>
+    </div>
+    <div id="quiz-card-container"></div>
+  </div>
+
   <!-- ===== MAIN ===== -->
   <main class="app-main">
 
@@ -57,6 +77,7 @@
   <script src="js/math.js"></script>
   <script src="js/english.js"></script>
   <script src="js/chinese.js"></script>
+  <script src="js/quiz.js"></script>
   <script src="js/app.js"></script>
 
 </body>
