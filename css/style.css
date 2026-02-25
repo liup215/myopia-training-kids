@@ -573,8 +573,68 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* ---- Start Quiz Section ---- */
-.quiz-start-section {
+/* ---- Session Buttons ---- */
+#session-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 40px 20px;
+}
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.btn-session {
+  display: block;
+  width: 100%;
+  padding: 40px 32px;
+  font-size: 2.4rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 28px;
+  cursor: pointer;
+  font-family: var(--font-main);
+  letter-spacing: 2px;
+  transition: transform 0.12s, box-shadow 0.12s;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  color: #fff;
+}
+
+.btn-session:hover:not(:disabled)  { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.22); }
+.btn-session:active:not(:disabled) { transform: translateY(0); }
+
+.btn-session-morning {
+  background: linear-gradient(135deg, #FF6B35 0%, #FFB347 100%);
+}
+
+.btn-session-evening {
+  background: linear-gradient(135deg, #4ECDC4 0%, #2B6CB0 100%);
+}
+
+.btn-session-done,
+.btn-session:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10) !important;
+  filter: grayscale(30%);
+}
+
+.session-status {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--success);
+  min-height: 1.6rem;
+}
+
+
   background: linear-gradient(135deg, #FFF3CD, #FFEAA7);
   padding: 18px 32px;
   display: flex;
