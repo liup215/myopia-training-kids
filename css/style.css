@@ -925,6 +925,55 @@ body.quiz-open { overflow: hidden; }
 
 .quiz-comp-answer:focus { outline: none; border-color: var(--secondary); }
 
+/* Multiple-choice options */
+.quiz-mcq-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.quiz-mcq-btn {
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: left;
+  background: #fff;
+  color: #333;
+  border: 3px solid #C3E6CB;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  touch-action: manipulation;
+  min-height: 56px;
+}
+
+.quiz-mcq-btn:hover  { background: #F0FFF4; border-color: var(--secondary); transform: translateY(-1px); }
+.quiz-mcq-btn:active { transform: translateY(0); }
+.quiz-mcq-btn.mcq-correct { background: #D4EDDA; border-color: var(--success); color: #155724; }
+.quiz-mcq-btn.mcq-wrong   { background: #F8D7DA; border-color: var(--danger);  color: #721C24; }
+.quiz-mcq-btn:disabled    { cursor: not-allowed; transform: none; }
+
+/* Question divider and typo note */
+.quiz-q-divider {
+  border: none;
+  border-top: 2px dashed #C3E6CB;
+  margin: 20px 0 0;
+}
+
+.quiz-mcq-note {
+  background: #FFF3CD;
+  border: 2px solid #FFEAA7;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: #856404;
+  margin: 10px 0 4px;
+}
+
 /* Outdoor slide */
 .quiz-outdoor-desc {
   font-size: 1.2rem;
@@ -967,6 +1016,8 @@ body.quiz-open { overflow: hidden; }
   .quiz-article-title { font-size: 2rem; }
   .quiz-comp-question { font-size: 1.4rem; }
   .quiz-comp-answer { font-size: 1.3rem; }
+  .quiz-mcq-btn { font-size: 1.4rem; padding: 20px 24px; }
+  .quiz-mcq-note { font-size: 1.1rem; }
   /* Two-column layout for math problems */
   .quiz-math-layout {
     flex-direction: row;
@@ -1013,6 +1064,8 @@ body.quiz-open { overflow: hidden; }
   .quiz-article-title { font-size: 1.3rem; }
   .quiz-comp-question { font-size: 1rem; }
   .quiz-comp-answer { font-size: 1rem; }
+  .quiz-mcq-btn { font-size: 1rem; padding: 13px 16px; }
+  .quiz-mcq-note { font-size: 0.9rem; padding: 10px 12px; }
   .quiz-complete-title { font-size: 1.8rem; }
   .quiz-complete-icon { font-size: 3.5rem; }
   .quiz-close-btn { font-size: 0.85rem; padding: 6px 12px; }
