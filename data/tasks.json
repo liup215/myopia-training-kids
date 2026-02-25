@@ -1,0 +1,128 @@
+{
+  "date": "2026-02-25",
+  "morning": {
+    "label": "🌞 早上训练",
+    "tasks": [
+      {
+        "id": "morning-math",
+        "type": "math",
+        "title": "数学练习",
+        "icon": "🔢",
+        "description": "今天的数学题，加油！",
+        "config": {
+          "addition": 3,
+          "subtraction": 3,
+          "multiplication": 2
+        }
+      },
+      {
+        "id": "morning-chinese",
+        "type": "chinese",
+        "title": "中文阅读",
+        "icon": "📖",
+        "description": "读一读今天的故事",
+        "articleId": "chinese-1"
+      },
+      {
+        "id": "morning-outdoor",
+        "type": "outdoor",
+        "title": "户外望远",
+        "icon": "🌳",
+        "description": "去户外看看远处的风景，至少20分钟",
+        "durationMinutes": 20
+      }
+    ]
+  },
+  "evening": {
+    "label": "🌙 晚上训练",
+    "tasks": [
+      {
+        "id": "evening-math",
+        "type": "math",
+        "title": "数学练习",
+        "icon": "🔢",
+        "description": "晚上再来几道数学题！",
+        "config": {
+          "addition": 2,
+          "subtraction": 2,
+          "multiplication": 2,
+          "division": 2
+        }
+      },
+      {
+        "id": "evening-english",
+        "type": "english",
+        "title": "英文阅读",
+        "icon": "🔤",
+        "description": "Read today's English story!",
+        "articleId": "english-1"
+      }
+    ]
+  },
+  "articles": {
+    "chinese-1": {
+      "title": "小猫钓鱼",
+      "content": [
+        "小猫和妈妈一起去钓鱼。",
+        "小猫坐在河边，把鱼钩放进水里。",
+        "一只蜻蜓飞来了，小猫去追蜻蜓，没钓到鱼。",
+        "一只蝴蝶飞来了，小猫去追蝴蝶，还是没钓到鱼。",
+        "妈妈说：钓鱼要专心，不能三心二意。",
+        "小猫听了妈妈的话，认真钓鱼。",
+        "终于，小猫钓到了一条大鱼！",
+        "小猫高兴地跳了起来。"
+      ],
+      "question": "小猫为什么一开始没钓到鱼？",
+      "answer": "因为小猫去追蜻蜓和蝴蝶，不专心钓鱼。"
+    },
+    "chinese-2": {
+      "title": "春天来了",
+      "content": [
+        "春天来了，天气变暖了。",
+        "小草从土里钻出来，绿绿的。",
+        "花儿开了，红的、黄的、紫的，真美！",
+        "小鸟在树枝上唱歌，叽叽喳喳。",
+        "小朋友们在公园里奔跑，笑声传出很远。",
+        "春天真是个美好的季节！"
+      ],
+      "question": "春天里有哪些美丽的景色？",
+      "answer": "有绿绿的小草、五颜六色的花朵、唱歌的小鸟。"
+    },
+    "english-1": {
+      "title": "The Big Red Ball",
+      "level": "RAZ Level I",
+      "content": [
+        "Tom has a big red ball.",
+        "He kicks the ball up high.",
+        "The ball goes over the fence.",
+        "Tom runs to get the ball.",
+        "He finds it in the garden.",
+        "Tom kicks the ball again.",
+        "This time it goes to his friend Sam.",
+        "Sam kicks it back to Tom.",
+        "They play ball all afternoon.",
+        "What a fun day!"
+      ],
+      "question": "Where did the ball go first?",
+      "answer": "The ball went over the fence."
+    },
+    "english-2": {
+      "title": "My Pet Cat",
+      "level": "RAZ Level I",
+      "content": [
+        "I have a pet cat.",
+        "Her name is Lily.",
+        "Lily has soft white fur.",
+        "She has big green eyes.",
+        "Lily likes to drink milk.",
+        "She likes to chase the ball.",
+        "At night, Lily sleeps on my bed.",
+        "She purrs softly.",
+        "I love my cat Lily.",
+        "She is my best friend."
+      ],
+      "question": "What color is Lily's fur?",
+      "answer": "Lily has soft white fur."
+    }
+  }
+}

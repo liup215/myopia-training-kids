@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="近视防控训练 - 专为6岁儿童设计的每日训练网页" />
+  <title>👁️ 近视防控训练 - 每日任务</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div>
+      <div class="app-title">👁️ 护眼训练基地</div>
+      <div class="app-subtitle">每天练习，眼睛棒棒！</div>
+    </div>
+    <div id="date-display">加载中...</div>
+  </header>
+
+  <!-- ===== PROGRESS BAR ===== -->
+  <div class="progress-section">
+    <span id="progress-label">今日进度: 0/0 (0%)</span>
+    <div class="progress-bar-track">
+      <div id="progress-bar-fill"></div>
+    </div>
+    <div id="stars-display">⭐</div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main">
+
+    <!-- Loading spinner -->
+    <div id="loading">
+      <div class="spinner"></div>
+      <div>任务加载中...</div>
+    </div>
+
+    <!-- Task content rendered by app.js -->
+    <div id="app-content"></div>
+
+    <!-- All done banner (hidden until all tasks complete) -->
+    <div id="all-done-banner" class="hidden">
+      <h2>🎊 今日任务全部完成！</h2>
+      <p>你真是太棒了！明天继续加油吧！⭐⭐⭐</p>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="app-footer">
+    <p>近视防控三板斧：离焦镜 + 户外活动 + 室内训练 💪</p>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/progress.js"></script>
+  <script src="js/math.js"></script>
+  <script src="js/english.js"></script>
+  <script src="js/chinese.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
