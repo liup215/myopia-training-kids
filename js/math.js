@@ -83,9 +83,20 @@ const MathModule = (() => {
         <div class="problems-grid" id="problems-grid-${task.id}">
           ${problems.map((p, i) => renderVerticalProblem(p, i)).join('')}
         </div>
-        <button class="btn-check" onclick="MathModule.checkAnswers('${task.id}')">✅ 检查答案</button>
+        <button class="btn-check" id="btn-check-${task.id}" onclick="MathModule.checkAnswers('${task.id}')">✅ 检查答案</button>
         <div class="math-result hidden" id="math-result-${task.id}"></div>
       </div>`;
+
+    // Add Enter key support: pressing Enter in any input triggers checkAnswers
+    const grid = container.querySelector(`#problems-grid-${task.id}`);
+    grid.querySelectorAll('.answer-input').forEach((input) => {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          checkAnswers(task.id);
+        }
+      });
+    });
   }
 
   function checkAnswers(taskId) {
