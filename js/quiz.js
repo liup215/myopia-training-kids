@@ -225,6 +225,11 @@ const QuizModule = (() => {
     const lines = article.content
       .map(line => `<p class="quiz-en-line">${line}</p>`)
       .join('');
+    const options = article.options || [];
+    const optionsHTML = options.map((opt, i) =>
+      `<button class="quiz-mcq-btn" id="quiz-mcq-${idx}-${i}"
+        onclick="QuizModule.selectMCQ(${idx}, ${i})">${String.fromCharCode(65 + i)}. ${opt}</button>`
+    ).join('');
 
     card.innerHTML = `
       <div class="quiz-task-label">${task.icon} ${task.title}</div>
@@ -235,16 +240,7 @@ const QuizModule = (() => {
       <div class="quiz-article-body en-body">${lines}</div>
       <div class="quiz-comprehension">
         <h4 class="quiz-comp-question">❓ ${article.question}</h4>
-        <textarea
-          id="quiz-en-answer-${idx}"
-          class="quiz-comp-answer"
-          rows="2"
-          placeholder="Write your answer here..."
-        ></textarea>
-        <button class="quiz-btn-check"
-          onclick="QuizModule.checkReading(${idx}, '${encodeURIComponent(article.answer)}', 'en')">
-          ✅ Check Answer
-        </button>
+        <div class="quiz-mcq-options">${optionsHTML}</div>
       </div>
       <div id="quiz-feedback-${idx}" class="quiz-feedback hidden"></div>
     `;
@@ -261,6 +257,11 @@ const QuizModule = (() => {
     const lines = article.content
       .map(line => `<p class="quiz-zh-line">${line}</p>`)
       .join('');
+    const options = article.options || [];
+    const optionsHTML = options.map((opt, i) =>
+      `<button class="quiz-mcq-btn" id="quiz-mcq-${idx}-${i}"
+        onclick="QuizModule.selectMCQ(${idx}, ${i})">${String.fromCharCode(65 + i)}. ${opt}</button>`
+    ).join('');
 
     card.innerHTML = `
       <div class="quiz-task-label">${task.icon} ${task.title}</div>
@@ -270,47 +271,38 @@ const QuizModule = (() => {
       <div class="quiz-article-body zh-body">${lines}</div>
       <div class="quiz-comprehension">
         <h4 class="quiz-comp-question">❓ ${article.question}</h4>
-        <textarea
-          id="quiz-zh-answer-${idx}"
-          class="quiz-comp-answer"
-          rows="2"
-          placeholder="写下你的答案..."
-        ></textarea>
-        <button class="quiz-btn-check"
-          onclick="QuizModule.checkReading(${idx}, '${encodeURIComponent(article.answer)}', 'zh')">
-          ✅ 查看答案
-        </button>
+        <div class="quiz-mcq-options">${optionsHTML}</div>
       </div>
       <div id="quiz-feedback-${idx}" class="quiz-feedback hidden"></div>
     `;
   }
 
-  function checkReading(idx, encodedAnswer, lang) {
+  function selectMCQ(idx, chosenIndex) {
     const slide = slides[idx];
     if (!slide) return;
-    const { task } = slide;
-
-    const answerEl = document.getElementById(`quiz-${lang}-answer-${idx}`);
+    const { task, article } = slide;
     const feedback = document.getElementById(`quiz-feedback-${idx}`);
-    if (!answerEl || !feedback) return;
+    const allBtns = document.querySelectorAll(`[id^="quiz-mcq-${idx}-"]`);
 
-    const userAnswer    = answerEl.value.trim();
-    const correctAnswer = decodeURIComponent(encodedAnswer);
-    const minLen        = lang === 'en' ? 3 : 2;
+    allBtns.forEach(btn => { btn.disabled = true; });
+
+    const correctIndex = article.correctIndex;
+    const isCorrect = chosenIndex === correctIndex;
+    const chosenBtn  = document.getElementById(`quiz-mcq-${idx}-${chosenIndex}`);
+    const correctBtn = document.getElementById(`quiz-mcq-${idx}-${correctIndex}`);
+
+    if (chosenBtn)  chosenBtn.classList.add(isCorrect ? 'mcq-correct' : 'mcq-wrong');
+    if (!isCorrect && correctBtn) correctBtn.classList.add('mcq-correct');
 
     feedback.classList.remove('hidden', 'quiz-correct', 'quiz-wrong');
-    if (userAnswer.length < minLen) {
-      feedback.textContent = lang === 'en'
-        ? 'Please write your answer first! ✍️'
-        : '请先写下你的答案！✍️';
+    const isEn = slide.slideType === 'english';
+    if (isCorrect) {
+      feedback.textContent = isEn ? '🌟 Great job! That\'s correct!' : '🌟 你真棒！回答正确！';
+      feedback.classList.add('quiz-correct');
+    } else {
+      feedback.textContent = isEn ? '💡 The correct answer is shown in green.' : '💡 正确答案已用绿色显示。';
       feedback.classList.add('quiz-wrong');
-      return;
     }
-
-    feedback.innerHTML = lang === 'en'
-      ? `🌟 Great job! Answer: <strong>${correctAnswer}</strong>`
-      : `🌟 你真棒！参考答案：<strong>${correctAnswer}</strong>`;
-    feedback.classList.add('quiz-correct');
 
     if (typeof App !== 'undefined') App.completeTask(task.id);
     setTimeout(() => nextSlide(), 2200);
@@ -387,5 +379,5 @@ const QuizModule = (() => {
     `;
   }
 
-  return { init, open, close, showSlide, checkMath, checkReading, startTimer, nextSlide };
+  return { init, open, close, showSlide, checkMath, selectMCQ, startTimer, nextSlide };
 })();

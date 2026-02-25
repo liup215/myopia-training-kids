@@ -73,7 +73,9 @@
         "小猫高兴地跳了起来。"
       ],
       "question": "小猫为什么一开始没钓到鱼？",
-      "answer": "因为小猫去追蜻蜓和蝴蝶，不专心钓鱼。"
+      "answer": "因为小猫去追蜻蜓和蝴蝶，不专心钓鱼。",
+      "options": ["因为河里没有鱼", "因为小猫去追蜻蜓和蝴蝶，不专心", "因为妈妈没有帮忙", "因为天气太热了"],
+      "correctIndex": 1
     },
     "chinese-2": {
       "title": "春天来了",
@@ -86,7 +88,9 @@
         "春天真是个美好的季节！"
       ],
       "question": "春天里有哪些美丽的景色？",
-      "answer": "有绿绿的小草、五颜六色的花朵、唱歌的小鸟。"
+      "answer": "有绿绿的小草、五颜六色的花朵、唱歌的小鸟。",
+      "options": ["有白雪和冰雪", "有黄叶和落叶", "有绿草、鲜花和唱歌的小鸟", "有大风和大雨"],
+      "correctIndex": 2
     },
     "english-1": {
       "title": "The Big Red Ball",
@@ -104,7 +108,9 @@
         "What a fun day!"
       ],
       "question": "Where did the ball go first?",
-      "answer": "The ball went over the fence."
+      "answer": "The ball went over the fence.",
+      "options": ["Into the garden", "Over the fence", "To his friend Sam", "Up into a tree"],
+      "correctIndex": 1
     },
     "english-2": {
       "title": "My Pet Cat",
@@ -122,7 +128,9 @@
         "She is my best friend."
       ],
       "question": "What color is Lily's fur?",
-      "answer": "Lily has soft white fur."
+      "answer": "Lily has soft white fur.",
+      "options": ["Black", "Brown", "White", "Yellow"],
+      "correctIndex": 2
     }
   }
 }
