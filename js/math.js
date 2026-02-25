@@ -46,31 +46,20 @@ const MathModule = (() => {
   }
 
   function renderVerticalProblem(prob, index) {
-    const aStr = String(prob.a);
-    const bStr = String(prob.b);
-    const ansStr = String(prob.answer);
-    const width = Math.max(aStr.length, bStr.length, ansStr.length) + 1;
-
-    const padded = (s) => s.padStart(width, '\u00A0');
-
     return `
       <div class="vertical-problem" data-index="${index}" data-answer="${prob.answer}">
-        <div class="prob-label">第 ${index + 1} 题</div>
-        <div class="vertical-box">
-          <div class="v-row top-num">${padded(aStr)}</div>
-          <div class="v-row mid-num"><span class="symbol">${prob.symbol}</span>${padded(bStr).slice(1)}</div>
-          <div class="v-divider"></div>
-          <div class="v-row answer-row">
-            <input
-              type="number"
-              class="answer-input"
-              placeholder="${'\u00A0'.repeat(width)}"
-              aria-label="第${index + 1}题答案"
-              inputmode="numeric"
-            />
-          </div>
+        <div class="problem-inline">
+          <span class="prob-label">第 ${index + 1} 题</span>
+          <span class="prob-expr">${prob.a} ${prob.symbol} ${prob.b} =</span>
+          <input
+            type="number"
+            class="answer-input"
+            placeholder="?"
+            aria-label="第${index + 1}题答案"
+            inputmode="numeric"
+          />
+          <div class="prob-feedback hidden"></div>
         </div>
-        <div class="prob-feedback hidden"></div>
       </div>`;
   }
 
