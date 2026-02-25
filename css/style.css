@@ -292,11 +292,20 @@ body {
   font-weight: 700;
   text-align: right;
   border: none;
-  background: transparent;
+  background: rgba(78, 205, 196, 0.08);
   outline: none;
   color: var(--primary);
-  padding: 2px 4px;
-  border-bottom: 2px solid var(--secondary);
+  padding: 10px 8px;
+  border-bottom: 3px solid var(--secondary);
+  border-radius: 6px 6px 0 0;
+  min-height: 52px;
+  cursor: text;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.answer-input:focus {
+  background: rgba(78, 205, 196, 0.15);
+  border-color: var(--primary);
 }
 
 .answer-input.input-correct {
