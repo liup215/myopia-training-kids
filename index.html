@@ -16,8 +16,20 @@
       <div class="app-title">👁️ 护眼训练基地</div>
       <div class="app-subtitle">每天练习，眼睛棒棒！</div>
     </div>
-    <div id="date-display">加载中...</div>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <div id="date-display">加载中...</div>
+      <button class="btn-parent-view" onclick="ParentView.open()">👨‍👩‍👧 家长查看</button>
+    </div>
   </header>
+
+  <!-- ===== PARENT OVERLAY ===== -->
+  <div id="parent-overlay" class="hidden">
+    <div class="parent-header">
+      <span class="parent-header-title">👨‍👩‍👧 家长进度追踪</span>
+      <button class="parent-close-btn" onclick="ParentView.close()">✕ 关闭</button>
+    </div>
+    <div id="parent-content"></div>
+  </div>
 
   <!-- ===== QUIZ OVERLAY ===== -->
   <div id="quiz-overlay" class="hidden">
@@ -74,6 +86,7 @@
   <script src="js/chinese.js"></script>
   <script src="js/quiz.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/parent.js"></script>
 
 </body>
 </html>
