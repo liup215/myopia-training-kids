@@ -4,6 +4,8 @@
 
 const App = (() => {
   let tasksData = null;
+  let sessionStartTime = null;
+  let currentSessionPeriod = null;
   const SESSION_KEY = 'myopia_sessions';
 
   // ---- Date helper ----
@@ -34,6 +36,14 @@ const App = (() => {
     const today = getTodayKey();
     if (!all[today]) all[today] = {};
     all[today][period] = true;
+    if (sessionStartTime) {
+      if (currentSessionPeriod === period) {
+        const durationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
+        Progress.recordSessionDuration(period, durationSeconds);
+      }
+      sessionStartTime = null;
+      currentSessionPeriod = null;
+    }
     try {
       localStorage.setItem(SESSION_KEY, JSON.stringify(all));
     } catch (e) {
@@ -96,6 +106,8 @@ const App = (() => {
 
   function startSession(period) {
     if (!tasksData || isSessionDone(period)) return;
+    sessionStartTime = Date.now();
+    currentSessionPeriod = period;
     QuizModule.init(tasksData, period);
     QuizModule.open();
   }

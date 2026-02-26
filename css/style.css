@@ -1164,3 +1164,387 @@ body.quiz-open { overflow: hidden; }
   #session-buttons { padding: 56px 20px; gap: 44px; }
   .btn-session { padding: 44px 28px; font-size: 2.4rem; }
 }
+
+/* ---- Parent View ---- */
+#parent-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#parent-overlay.hidden { display: none !important; }
+
+body.parent-open { overflow: hidden; }
+
+.parent-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: rgba(0,0,0,0.35);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.parent-header-title {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.parent-close-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 20px;
+  padding: 7px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: background 0.2s;
+}
+
+.parent-close-btn:hover { background: rgba(255,255,255,0.28); }
+
+#parent-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---- PIN screen ---- */
+.parent-pin-screen {
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.parent-pin-icon {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.parent-pin-title {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.parent-pin-hint {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.parent-pin-display {
+  font-size: 2.2rem;
+  letter-spacing: 8px;
+  color: var(--accent);
+  font-weight: 800;
+  margin-bottom: 28px;
+  min-height: 2.8rem;
+}
+
+.parent-numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.parent-numpad-btn {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: background 0.15s, transform 0.1s;
+  touch-action: manipulation;
+  min-height: 60px;
+}
+
+.parent-numpad-btn:hover  { background: rgba(255,255,255,0.22); transform: scale(1.04); }
+.parent-numpad-btn:active { transform: scale(0.97); }
+
+/* ---- Dashboard ---- */
+.parent-dashboard {
+  width: 100%;
+  max-width: 720px;
+}
+
+.parent-stats-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.parent-stat-card {
+  flex: 1;
+  min-width: 100px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 18px 12px;
+  text-align: center;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.parent-stat-num {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.parent-stat-label {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.75);
+}
+
+.parent-stat-label small {
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+.parent-section-title {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+/* ---- Bar chart ---- */
+.parent-chart-section {
+  background: rgba(255,255,255,0.07);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.parent-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 6px;
+  height: 130px;
+  margin-bottom: 10px;
+}
+
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.chart-bar-value {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-height: 1.2rem;
+}
+
+.chart-bar-track {
+  width: 100%;
+  max-width: 36px;
+  height: 80px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px 8px 4px 4px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.chart-bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, var(--secondary), #2EC4B6);
+  border-radius: 6px 6px 0 0;
+  min-height: 4px;
+  transition: height 0.5s ease;
+}
+
+.chart-today .chart-bar-fill {
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+}
+
+.chart-bar-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.65);
+  white-space: nowrap;
+}
+
+.chart-today .chart-bar-label {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.chart-bar-sessions {
+  display: flex;
+  gap: 2px;
+  font-size: 0.75rem;
+}
+
+.sess-done { color: #4ECDC4; }
+.sess-miss { color: rgba(255,255,255,0.2); }
+
+.parent-chart-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  justify-content: center;
+}
+
+.legend-item { display: flex; align-items: center; gap: 4px; }
+
+/* ---- Log entries ---- */
+.parent-log-section {
+  background: rgba(255,255,255,0.07);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.parent-logs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.parent-log-entry {
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.parent-log-date {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 6px;
+}
+
+.parent-log-sessions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.log-done { color: #4ECDC4; font-size: 0.88rem; }
+.log-miss { color: rgba(255,255,255,0.35); font-size: 0.88rem; }
+
+.parent-log-stars {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.parent-no-data {
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.95rem;
+}
+
+/* ---- Settings ---- */
+.parent-settings-section {
+  background: rgba(255,255,255,0.07);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.parent-action-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: background 0.2s;
+  margin-right: 10px;
+  margin-bottom: 12px;
+}
+
+.parent-action-btn:hover { background: rgba(255,255,255,0.25); }
+
+.parent-change-pin-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.parent-pin-text-input {
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 1.1rem;
+  color: #fff;
+  font-family: var(--font-main);
+  width: 140px;
+}
+
+.parent-pin-text-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---- Parent button in main UI ---- */
+.btn-parent-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 20px;
+  padding: 7px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: background 0.2s;
+  text-decoration: none;
+}
+
+.btn-parent-view:hover { background: rgba(255,255,255,0.32); }
+
+/* ---- Mobile responsive for parent view ---- */
+@media (max-width: 600px) {
+  .parent-pin-title { font-size: 1.3rem; }
+  .parent-pin-display { font-size: 1.8rem; letter-spacing: 6px; }
+  .parent-numpad-btn { font-size: 1.3rem; padding: 14px; min-height: 52px; }
+  .parent-stat-num { font-size: 2rem; }
+  .parent-chart { height: 110px; }
+  .chart-bar-track { height: 64px; }
+  #parent-content { padding: 16px 14px 32px; }
+  .parent-header { padding: 10px 14px; }
+}

@@ -73,5 +73,30 @@ const Progress = (() => {
     return streak;
   }
 
-  return { markCompleted, isCompleted, getTodayStars, getTodayCompletedCount, getStreak, getTodayKey };
+  function recordSessionDuration(period, durationSeconds) {
+    const all = load();
+    const key = getTodayKey();
+    if (!all[key]) all[key] = { completed: {}, stars: 0 };
+    if (!all[key].sessions) all[key].sessions = {};
+    all[key].sessions[period] = {
+      completedAt: new Date().toISOString(),
+      durationSeconds
+    };
+    save(all);
+  }
+
+  function getHistory(days) {
+    const all = load();
+    const result = [];
+    const today = new Date();
+    for (let i = days - 1; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      result.push({ date: key, data: all[key] || null });
+    }
+    return result;
+  }
+
+  return { markCompleted, isCompleted, getTodayStars, getTodayCompletedCount, getStreak, getTodayKey, recordSessionDuration, getHistory };
 })();
