@@ -964,6 +964,31 @@ body.quiz-open { overflow: hidden; }
   margin: 20px 0 0;
 }
 
+/* Spell input area */
+.quiz-spell-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.quiz-spell-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1.3rem;
+  font-family: var(--font-main);
+  font-weight: 700;
+  border: 3px solid #C3E6CB;
+  border-radius: 14px;
+  background: #fff;
+  color: #333;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.quiz-spell-input:focus { outline: none; border-color: var(--secondary); }
+.quiz-spell-input:disabled { opacity: 0.7; background: #f8f8f8; }
+
 .quiz-mcq-note {
   background: #FFF3CD;
   border: 2px solid #FFEAA7;

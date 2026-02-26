@@ -12,6 +12,7 @@ const QuizModule = (() => {
   let timerIntervals = {};    // taskId -> intervalId
   let slideQAnswered = {};    // idx -> # questions answered on this slide
   let slideTotalQ = {};       // idx -> total questions for this slide
+  let slideQuestions = {};    // idx -> questions array for this slide
 
   // ---- Build flat slides array from tasks data ----
 
@@ -53,6 +54,7 @@ const QuizModule = (() => {
     timerIntervals = {};
     slideQAnswered = {};
     slideTotalQ = {};
+    slideQuestions = {};
   }
 
   function open() {
@@ -249,7 +251,25 @@ const QuizModule = (() => {
     `;
   }
 
-  // ---- English reading slide ----
+  // ---- English slide (单词拼写训练 only) ----
+
+  function renderSpellQuestionHTML(q, idx, qIdx) {
+    const divider = qIdx > 0 ? '<hr class="quiz-q-divider">' : '';
+    return `
+      ${divider}
+      <div class="quiz-question-section" id="quiz-qsection-${idx}-${qIdx}">
+        <h4 class="quiz-comp-question">✏️ ${q.prompt}</h4>
+        <div class="quiz-spell-area">
+          <input type="text" class="quiz-spell-input" id="quiz-spell-${idx}-${qIdx}"
+            autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            placeholder="输入英文单词..." />
+          <button class="quiz-btn-check" id="quiz-spell-btn-${idx}-${qIdx}"
+            onclick="QuizModule.checkSpell(${idx}, ${qIdx})">✅ 检查拼写</button>
+        </div>
+        <div id="quiz-feedback-${idx}-${qIdx}" class="quiz-feedback hidden"></div>
+      </div>
+    `;
+  }
 
   function renderEnglishSlide(card, slide, idx) {
     const { task, article } = slide;
@@ -257,26 +277,79 @@ const QuizModule = (() => {
       card.innerHTML = `<p class="error-msg">⚠️ 文章加载失败</p>`;
       return;
     }
-    const lines = article.content
-      .map(line => `<p class="quiz-en-line">${line}</p>`)
-      .join('');
-    const allQuestions = buildQuestionList(article);
-    slideTotalQ[idx] = allQuestions.length;
+    const spellQuestions = (article.extraQuestions || []).filter(q => q.type === 'spell');
+    if (spellQuestions.length === 0) {
+      card.innerHTML = `<p class="error-msg">⚠️ 暂无拼写练习</p>`;
+      return;
+    }
+    slideQuestions[idx] = spellQuestions;
+    slideTotalQ[idx] = spellQuestions.length;
     slideQAnswered[idx] = 0;
-    const questionsHTML = allQuestions.map((q, qIdx) => renderQuestionHTML(q, idx, qIdx)).join('');
+    const questionsHTML = spellQuestions.map((q, qIdx) => renderSpellQuestionHTML(q, idx, qIdx)).join('');
 
     card.innerHTML = `
       <div class="quiz-task-label">${task.icon} ${task.title}</div>
-      <div class="quiz-article-header">
-        <span class="quiz-article-level">${article.level || 'RAZ Level I'}</span>
-        <h2 class="quiz-article-title">${article.title}</h2>
-      </div>
-      <div class="quiz-article-body en-body">${lines}</div>
       <div class="quiz-comprehension">${questionsHTML}</div>
     `;
+
+    // Bind Enter key on each spell input
+    spellQuestions.forEach((_, qIdx) => {
+      const input = card.querySelector(`#quiz-spell-${idx}-${qIdx}`);
+      if (input) {
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Enter') { e.preventDefault(); checkSpell(idx, qIdx); }
+        });
+      }
+    });
   }
 
-  // ---- Chinese reading slide ----
+  function checkSpell(idx, qIdx) {
+    const section = document.getElementById(`quiz-qsection-${idx}-${qIdx}`);
+    if (!section || section.dataset.answered) return;
+
+    const input    = document.getElementById(`quiz-spell-${idx}-${qIdx}`);
+    const feedback = document.getElementById(`quiz-feedback-${idx}-${qIdx}`);
+    const btn      = document.getElementById(`quiz-spell-btn-${idx}-${qIdx}`);
+    if (!input || !feedback) return;
+
+    const slide = slides[idx];
+    if (!slide) return;
+    const questions = slideQuestions[idx] || [];
+    const q = questions[qIdx];
+    if (!q) return;
+
+    const userAnswer = input.value.trim().replace(/\s+/g, '').toLowerCase();
+    if (!userAnswer) {
+      feedback.textContent = '请先输入单词！✍️';
+      feedback.classList.remove('hidden', 'quiz-correct');
+      feedback.classList.add('quiz-wrong');
+      return;
+    }
+
+    section.dataset.answered = '1';
+    input.disabled = true;
+    if (btn) btn.disabled = true;
+
+    const isCorrect = userAnswer === q.answer.toLowerCase();
+    feedback.classList.remove('hidden', 'quiz-correct', 'quiz-wrong');
+    if (isCorrect) {
+      feedback.textContent = '🌟 拼写正确！太棒了！';
+      feedback.classList.add('quiz-correct');
+      input.classList.add('quiz-input-correct');
+    } else {
+      feedback.innerHTML = `❌ 正确拼写是：<strong>${q.answer}</strong>`;
+      feedback.classList.add('quiz-wrong');
+      input.classList.add('quiz-input-wrong');
+    }
+
+    slideQAnswered[idx] = (slideQAnswered[idx] || 0) + 1;
+    if (slideQAnswered[idx] >= (slideTotalQ[idx] || 1)) {
+      if (typeof App !== 'undefined') App.completeTask(slide.task.id);
+      setTimeout(() => nextSlide(), 2200);
+    }
+  }
+
+  // ---- Chinese slide (形近字辨析 only) ----
 
   function renderChineseSlide(card, slide, idx) {
     const { task, article } = slide;
@@ -284,20 +357,18 @@ const QuizModule = (() => {
       card.innerHTML = `<p class="error-msg">⚠️ 文章加载失败</p>`;
       return;
     }
-    const lines = article.content
-      .map(line => `<p class="quiz-zh-line">${line}</p>`)
-      .join('');
-    const allQuestions = buildQuestionList(article);
-    slideTotalQ[idx] = allQuestions.length;
+    const typoQuestions = (article.extraQuestions || []).filter(q => q.type === 'typo');
+    if (typoQuestions.length === 0) {
+      card.innerHTML = `<p class="error-msg">⚠️ 暂无形近字练习</p>`;
+      return;
+    }
+    slideQuestions[idx] = typoQuestions;
+    slideTotalQ[idx] = typoQuestions.length;
     slideQAnswered[idx] = 0;
-    const questionsHTML = allQuestions.map((q, qIdx) => renderQuestionHTML(q, idx, qIdx)).join('');
+    const questionsHTML = typoQuestions.map((q, qIdx) => renderQuestionHTML(q, idx, qIdx)).join('');
 
     card.innerHTML = `
       <div class="quiz-task-label">${task.icon} ${task.title}</div>
-      <div class="quiz-article-header">
-        <h2 class="quiz-article-title">${article.title}</h2>
-      </div>
-      <div class="quiz-article-body zh-body">${lines}</div>
       <div class="quiz-comprehension">${questionsHTML}</div>
     `;
   }
@@ -312,7 +383,7 @@ const QuizModule = (() => {
     if (!section || section.dataset.answered) return;
     section.dataset.answered = '1';
 
-    const allQuestions = buildQuestionList(article);
+    const allQuestions = slideQuestions[idx] || buildQuestionList(article);
     const q = allQuestions[qIdx];
     if (!q) return;
 
@@ -428,5 +499,5 @@ const QuizModule = (() => {
     `;
   }
 
-  return { init, open, close, showSlide, checkMath, selectMCQ, selectMCQQuestion, startTimer, nextSlide };
+  return { init, open, close, showSlide, checkMath, selectMCQ, selectMCQQuestion, checkSpell, startTimer, nextSlide };
 })();

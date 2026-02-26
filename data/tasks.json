@@ -18,9 +18,9 @@
       {
         "id": "morning-chinese",
         "type": "chinese",
-        "title": "中文阅读",
-        "icon": "📖",
-        "description": "读一读今天的故事",
+        "title": "形近字辨析",
+        "icon": "✏️",
+        "description": "辨认形近字，完成选择题",
         "articleId": "chinese-1"
       },
       {
@@ -52,9 +52,9 @@
       {
         "id": "evening-english",
         "type": "english",
-        "title": "英文阅读",
+        "title": "英文单词拼写",
         "icon": "🔤",
-        "description": "Read today's English story!",
+        "description": "练习常用英语单词拼写！",
         "articleId": "english-1"
       }
     ]
@@ -131,16 +131,24 @@
       "correctIndex": 1,
       "extraQuestions": [
         {
-          "type": "vocab",
-          "prompt": "What does the word 'fence' mean?",
-          "options": ["A wall or barrier around a yard", "A type of red ball", "A kind of garden flower", "A ball game"],
-          "correctIndex": 0
+          "type": "spell",
+          "prompt": "请拼写「踢」这个英文单词：",
+          "answer": "kick"
         },
         {
-          "type": "grammar",
-          "prompt": "Tom ___ the ball over the fence. (past tense)",
-          "options": ["kick", "kicks", "kicked", "kicking"],
-          "correctIndex": 2
+          "type": "spell",
+          "prompt": "请拼写「球」这个英文单词：",
+          "answer": "ball"
+        },
+        {
+          "type": "spell",
+          "prompt": "请拼写「围栏」这个英文单词：",
+          "answer": "fence"
+        },
+        {
+          "type": "spell",
+          "prompt": "请拼写「朋友」这个英文单词：",
+          "answer": "friend"
         }
       ]
     },
@@ -165,16 +173,24 @@
       "correctIndex": 2,
       "extraQuestions": [
         {
-          "type": "vocab",
-          "prompt": "What does 'purrs' mean in the story?",
-          "options": ["Makes a soft happy sound", "Runs very fast", "Drinks a lot of milk", "Chases a ball"],
-          "correctIndex": 0
+          "type": "spell",
+          "prompt": "请拼写「猫」这个英文单词：",
+          "answer": "cat"
         },
         {
-          "type": "grammar",
-          "prompt": "She ___ on my bed at night. Choose the correct verb.",
-          "options": ["sleep", "sleeps", "sleeping", "slept"],
-          "correctIndex": 1
+          "type": "spell",
+          "prompt": "请拼写「牛奶」这个英文单词：",
+          "answer": "milk"
+        },
+        {
+          "type": "spell",
+          "prompt": "请拼写「睡觉」这个英文单词：",
+          "answer": "sleep"
+        },
+        {
+          "type": "spell",
+          "prompt": "请拼写「追逐」这个英文单词：",
+          "answer": "chase"
         }
       ]
     }
