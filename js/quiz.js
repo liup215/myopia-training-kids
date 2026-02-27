@@ -14,6 +14,17 @@ const QuizModule = (() => {
   let slideTotalQ = {};       // idx -> total questions for this slide
   let slideQuestions = {};    // idx -> questions array for this slide
 
+  // ---- Utility: shuffle array and pick first n items ----
+
+  function shuffleAndPick(arr, n) {
+    const shuffled = arr.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled.slice(0, Math.min(n, shuffled.length));
+  }
+
   // ---- Build flat slides array from tasks data ----
 
   function buildSlides(data, period) {
@@ -277,7 +288,10 @@ const QuizModule = (() => {
       card.innerHTML = `<p class="error-msg">⚠️ 文章加载失败</p>`;
       return;
     }
-    const spellQuestions = (article.extraQuestions || []).filter(q => q.type === 'spell');
+    const spellQuestions = shuffleAndPick(
+      (article.extraQuestions || []).filter(q => q.type === 'spell'),
+      4
+    );
     if (spellQuestions.length === 0) {
       card.innerHTML = `<p class="error-msg">⚠️ 暂无拼写练习</p>`;
       return;
@@ -357,7 +371,10 @@ const QuizModule = (() => {
       card.innerHTML = `<p class="error-msg">⚠️ 文章加载失败</p>`;
       return;
     }
-    const typoQuestions = (article.extraQuestions || []).filter(q => q.type === 'typo');
+    const typoQuestions = shuffleAndPick(
+      (article.extraQuestions || []).filter(q => q.type === 'typo'),
+      4
+    );
     if (typoQuestions.length === 0) {
       card.innerHTML = `<p class="error-msg">⚠️ 暂无形近字练习</p>`;
       return;
