@@ -21,7 +21,7 @@
         "title": "形近字辨析",
         "icon": "✏️",
         "description": "辨认形近字，完成选择题",
-        "articleId": "chinese-1"
+        "articleId": "chinese-vocab-bank"
       },
       {
         "id": "morning-outdoor",
@@ -54,8 +54,8 @@
         "type": "english",
         "title": "英文单词拼写",
         "icon": "🔤",
-        "description": "练习常用英语单词拼写！",
-        "articleId": "english-1"
+        "description": "练习KET英语单词拼写！",
+        "articleId": "english-ket-vocab"
       }
     ]
   },
@@ -192,6 +192,304 @@
           "prompt": "请拼写「追逐」这个英文单词：",
           "answer": "chase"
         }
+      ]
+    },
+    "chinese-vocab-bank": {
+      "title": "形近字词汇库",
+      "content": [],
+      "question": "",
+      "answer": "",
+      "options": [],
+      "correctIndex": 0,
+      "extraQuestions": [
+        {
+          "type": "typo",
+          "prompt": "「蓝天__日，微风轻柔」，哪个字填进去是正确的？",
+          "options": ["睛", "晴", "情", "清"],
+          "correctIndex": 1,
+          "note": "「晴天」「晴朗」的「晴」有日字旁，和天气有关；「眼睛」的「睛」有目字旁，和眼睛有关。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「明天我们__次见面吧！」，哪个字填进去是正确的？",
+          "options": ["在", "再", "载", "哉"],
+          "correctIndex": 1,
+          "note": "「再见」「再次」的「再」表示下一次；「在家」「在学校」的「在」表示地点，两个字意思不一样！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「她穿的裙子真__亮！」，哪个字填进去是正确的？",
+          "options": ["飘", "漂", "瓢", "票"],
+          "correctIndex": 1,
+          "note": "「漂亮」的「漂」；「飘扬」「飘动」的「飘」是飘动的意思，两个字不要搞混哦！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「出门要__好帽子」，哪个字填进去是正确的？",
+          "options": ["带", "戴", "代", "袋"],
+          "correctIndex": 1,
+          "note": "「戴帽子」「佩戴」的「戴」是穿戴在身上的意思；「携带」「带领」的「带」意思不同哦！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「秋天的树叶五颜六__」，哪个字填进去是正确的？",
+          "options": ["采", "彩", "踩", "睬"],
+          "correctIndex": 1,
+          "note": "「五颜六色」「彩色」的「彩」有鲜艳颜色的意思；「采摘」「采花」的「采」是摘取的意思。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「上课了，请大家__好」，哪个字填进去是正确的？",
+          "options": ["座", "坐", "挫", "做"],
+          "correctIndex": 1,
+          "note": "「坐下」「坐好」的「坐」是动作；「座位」「宝座」的「座」是名词，表示位置。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「认真__好每一件事」，哪个字填进去是正确的？",
+          "options": ["作", "做", "坐", "佐"],
+          "correctIndex": 1,
+          "note": "「做事」「做作业」的「做」是动词；「工作」「作文」的「作」常和名词搭配。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「我们耐心等__爸爸」，哪个字填进去是正确的？",
+          "options": ["猴", "候", "侯", "喉"],
+          "correctIndex": 1,
+          "note": "「等候」「候鸟」的「候」是等待的意思；「猴子」「猴子」的「猴」是动物，两个字不一样！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「做事要靠__己的努力」，哪个字填进去是正确的？",
+          "options": ["已", "己", "巳", "以"],
+          "correctIndex": 1,
+          "note": "「自己」的「己」；「已经」的「已」；这两个字非常像，记住「己」只有一点朝上！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「小蝴蝶在__丛中飞舞」，哪个字填进去是正确的？",
+          "options": ["化", "花", "话", "划"],
+          "correctIndex": 1,
+          "note": "「花朵」「花园」的「花」是植物；「变化」「化学」的「化」是变化的意思，两个字写法不同。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「天气太热，草地变__了」，哪个字填进去是正确的？",
+          "options": ["千", "干", "杆", "竿"],
+          "correctIndex": 1,
+          "note": "「干枯」「干燥」的「干」；「一千」「千里」的「千」是数字，两个字千万别写错！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「__末快乐，好好休息！」，哪个字填进去是正确的？",
+          "options": ["未", "末", "木", "本"],
+          "correctIndex": 1,
+          "note": "「周末」的「末」表示结尾、末端；「未来」的「未」表示还没发生；两个字差一横哦！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「今天写__记，记录开心的事」，哪个字填进去是正确的？",
+          "options": ["目", "日", "曰", "月"],
+          "correctIndex": 1,
+          "note": "「日记」「日出」的「日」是太阳的意思；「目标」「目光」的「目」是眼睛的意思。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「今天__阳真好，照得暖洋洋！」，哪个字填进去是正确的？",
+          "options": ["大", "太", "犬", "夫"],
+          "correctIndex": 1,
+          "note": "「太阳」「太好了」的「太」多了一个点；「大小」「大家」的「大」少一个点，要认清楚！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「河水十分清__，能看见水底的石头」，哪个字填进去是正确的？",
+          "options": ["请", "清", "情", "晴"],
+          "correctIndex": 1,
+          "note": "「清澈」「清水」的「清」有三点水，跟水有关；「请客」「请问」的「请」有言字旁。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「我帮奶奶__草，累了一身汗」，哪个字填进去是正确的？",
+          "options": ["拨", "拔", "拿", "披"],
+          "correctIndex": 1,
+          "note": "「拔草」「拔河」的「拔」是向上用力的动作；「拨号」「拨动」的「拨」是拨开的动作。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「天空是__色的，白云飘在上面」，哪个字填进去是正确的？",
+          "options": ["篮", "蓝", "滥", "监"],
+          "correctIndex": 1,
+          "note": "「蓝天」「蓝色」的「蓝」；「篮球」「花篮」的「篮」有竹字头，跟竹子编的东西有关！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「体育课上，同学们快乐地__步」，哪个字填进去是正确的？",
+          "options": ["泡", "炮", "跑", "袍"],
+          "correctIndex": 2,
+          "note": "「跑步」「跑道」的「跑」有足字旁，跟脚有关；「泡泡」有三点水；「炮竹」有火字旁。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「你的__睛真漂亮，大大的！」，哪个字填进去是正确的？",
+          "options": ["限", "眼", "眠", "根"],
+          "correctIndex": 1,
+          "note": "「眼睛」「眼泪」的「眼」有目字旁，和眼睛有关；「限制」「限度」的「限」意思完全不同。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「夏天运动后感到口__，要多喝水」，哪个字填进去是正确的？",
+          "options": ["喝", "渴", "竭", "揭"],
+          "correctIndex": 1,
+          "note": "「口渴」的「渴」有三点水，表示想喝水；「喝水」的「喝」有口字旁，表示用嘴喝水的动作。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「放学后我在公园里__了一会儿」，哪个字填进去是正确的？",
+          "options": ["亭", "停", "庭", "廷"],
+          "correctIndex": 1,
+          "note": "「停下来」「停车」的「停」有人字旁，表示停止；「亭子」的「亭」是建筑物，两个字不同！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「窗外天__了，鸟儿开始唱歌」，哪个字填进去是正确的？",
+          "options": ["鸣", "明", "名", "命"],
+          "correctIndex": 1,
+          "note": "「天明」「明亮」的「明」由日和月组成；「鸟鸣」「鸣叫」的「鸣」有鸟字，表示鸟叫声。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「左手和__手都很重要，要两只手配合」，哪个字填进去是正确的？",
+          "options": ["有", "右", "友", "佑"],
+          "correctIndex": 1,
+          "note": "「左右」的「右」；「朋友」的「友」；「有没有」的「有」；这三个字形状相似，要仔细区分！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「这道菜很__见，每家都会做」，哪个字填进去是正确的？",
+          "options": ["尝", "常", "偿", "裳"],
+          "correctIndex": 1,
+          "note": "「常常」「平常」的「常」；「品尝」「尝试」的「尝」是试着吃或体验某事的意思。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「老师开始__故事，我们认真听」，哪个字填进去是正确的？",
+          "options": ["进", "讲", "经", "境"],
+          "correctIndex": 1,
+          "note": "「讲故事」「讲话」的「讲」有言字旁，和说话有关；「进入」「进步」的「进」有走之旁。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「冬天很__，要多穿衣服」，哪个字填进去是正确的？",
+          "options": ["令", "冷", "零", "岭"],
+          "correctIndex": 1,
+          "note": "「寒冷」「冷水」的「冷」有两点水，和寒冷有关；「命令」「号令」的「令」意思完全不同。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「有不懂的问题，要多__老师」，哪个字填进去是正确的？",
+          "options": ["闻", "问", "们", "间"],
+          "correctIndex": 1,
+          "note": "「问题」「问路」的「问」是请问的意思；「新闻」「听闻」的「闻」是听到、知道的意思。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「这条路走得很__，没有弯曲」，哪个字填进去是正确的？",
+          "options": ["真", "直", "值", "植"],
+          "correctIndex": 1,
+          "note": "「笔直」「直线」的「直」表示没有弯曲；「真正」「真实」的「真」表示不假；两个字要区分！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「春天来了，小__从地里钻出来了」，哪个字填进去是正确的？",
+          "options": ["早", "草", "枣", "皂"],
+          "correctIndex": 1,
+          "note": "「小草」「草地」的「草」有草字头，是植物；「早上」「早起」的「早」有日字旁，和时间有关。"
+        },
+        {
+          "type": "typo",
+          "prompt": "「上学不能迟__，要提前出发」，哪个字填进去是正确的？",
+          "options": ["到", "至", "倒", "道"],
+          "correctIndex": 0,
+          "note": "「迟到」的「到」表示到达某地；「倒下」的「倒」有人字旁，表示倒下或倒着；注意区分！"
+        },
+        {
+          "type": "typo",
+          "prompt": "「同学们一起唱歌，声音很__亮」，哪个字填进去是正确的？",
+          "options": ["响", "嚮", "向", "享"],
+          "correctIndex": 0,
+          "note": "「响亮」「响声」的「响」有口字旁，表示声音大；「方向」「向前」的「向」表示方向。"
+        }
+      ]
+    },
+    "english-ket-vocab": {
+      "title": "KET Vocabulary Bank",
+      "content": [],
+      "question": "",
+      "answer": "",
+      "options": [],
+      "correctIndex": 0,
+      "extraQuestions": [
+        { "type": "spell", "prompt": "请拼写「苹果」这个英文单词：", "answer": "apple" },
+        { "type": "spell", "prompt": "请拼写「香蕉」这个英文单词：", "answer": "banana" },
+        { "type": "spell", "prompt": "请拼写「橙子」这个英文单词：", "answer": "orange" },
+        { "type": "spell", "prompt": "请拼写「面包」这个英文单词：", "answer": "bread" },
+        { "type": "spell", "prompt": "请拼写「牛奶」这个英文单词：", "answer": "milk" },
+        { "type": "spell", "prompt": "请拼写「鸡蛋」这个英文单词：", "answer": "egg" },
+        { "type": "spell", "prompt": "请拼写「蛋糕」这个英文单词：", "answer": "cake" },
+        { "type": "spell", "prompt": "请拼写「汤」这个英文单词：", "answer": "soup" },
+        { "type": "spell", "prompt": "请拼写「米饭」这个英文单词：", "answer": "rice" },
+        { "type": "spell", "prompt": "请拼写「狗」这个英文单词：", "answer": "dog" },
+        { "type": "spell", "prompt": "请拼写「猫」这个英文单词：", "answer": "cat" },
+        { "type": "spell", "prompt": "请拼写「鸟」这个英文单词：", "answer": "bird" },
+        { "type": "spell", "prompt": "请拼写「鱼」这个英文单词：", "answer": "fish" },
+        { "type": "spell", "prompt": "请拼写「马」这个英文单词：", "answer": "horse" },
+        { "type": "spell", "prompt": "请拼写「兔子」这个英文单词：", "answer": "rabbit" },
+        { "type": "spell", "prompt": "请拼写「大象」这个英文单词：", "answer": "elephant" },
+        { "type": "spell", "prompt": "请拼写「狮子」这个英文单词：", "answer": "lion" },
+        { "type": "spell", "prompt": "请拼写「老虎」这个英文单词：", "answer": "tiger" },
+        { "type": "spell", "prompt": "请拼写「青蛙」这个英文单词：", "answer": "frog" },
+        { "type": "spell", "prompt": "请拼写「猴子」这个英文单词：", "answer": "monkey" },
+        { "type": "spell", "prompt": "请拼写「妈妈」这个英文单词：", "answer": "mother" },
+        { "type": "spell", "prompt": "请拼写「爸爸」这个英文单词：", "answer": "father" },
+        { "type": "spell", "prompt": "请拼写「姐姐/妹妹」这个英文单词：", "answer": "sister" },
+        { "type": "spell", "prompt": "请拼写「哥哥/弟弟」这个英文单词：", "answer": "brother" },
+        { "type": "spell", "prompt": "请拼写「手」这个英文单词：", "answer": "hand" },
+        { "type": "spell", "prompt": "请拼写「脚」这个英文单词：", "answer": "foot" },
+        { "type": "spell", "prompt": "请拼写「眼睛」这个英文单词：", "answer": "eye" },
+        { "type": "spell", "prompt": "请拼写「鼻子」这个英文单词：", "answer": "nose" },
+        { "type": "spell", "prompt": "请拼写「耳朵」这个英文单词：", "answer": "ear" },
+        { "type": "spell", "prompt": "请拼写「书」这个英文单词：", "answer": "book" },
+        { "type": "spell", "prompt": "请拼写「铅笔」这个英文单词：", "answer": "pencil" },
+        { "type": "spell", "prompt": "请拼写「老师」这个英文单词：", "answer": "teacher" },
+        { "type": "spell", "prompt": "请拼写「学校」这个英文单词：", "answer": "school" },
+        { "type": "spell", "prompt": "请拼写「朋友」这个英文单词：", "answer": "friend" },
+        { "type": "spell", "prompt": "请拼写「花」这个英文单词：", "answer": "flower" },
+        { "type": "spell", "prompt": "请拼写「水」这个英文单词：", "answer": "water" },
+        { "type": "spell", "prompt": "请拼写「早上」这个英文单词：", "answer": "morning" },
+        { "type": "spell", "prompt": "请拼写「晚上」这个英文单词：", "answer": "evening" },
+        { "type": "spell", "prompt": "请拼写「今天」这个英文单词：", "answer": "today" },
+        { "type": "spell", "prompt": "请拼写「明天」这个英文单词：", "answer": "tomorrow" },
+        { "type": "spell", "prompt": "请拼写「红色」这个英文单词：", "answer": "red" },
+        { "type": "spell", "prompt": "请拼写「蓝色」这个英文单词：", "answer": "blue" },
+        { "type": "spell", "prompt": "请拼写「绿色」这个英文单词：", "answer": "green" },
+        { "type": "spell", "prompt": "请拼写「黄色」这个英文单词：", "answer": "yellow" },
+        { "type": "spell", "prompt": "请拼写「白色」这个英文单词：", "answer": "white" },
+        { "type": "spell", "prompt": "请拼写「黑色」这个英文单词：", "answer": "black" },
+        { "type": "spell", "prompt": "请拼写「快乐的」这个英文单词：", "answer": "happy" },
+        { "type": "spell", "prompt": "请拼写「大的」这个英文单词：", "answer": "big" },
+        { "type": "spell", "prompt": "请拼写「小的」这个英文单词：", "answer": "small" },
+        { "type": "spell", "prompt": "请拼写「跑」这个英文单词：", "answer": "run" },
+        { "type": "spell", "prompt": "请拼写「跳」这个英文单词：", "answer": "jump" },
+        { "type": "spell", "prompt": "请拼写「游泳」这个英文单词：", "answer": "swim" },
+        { "type": "spell", "prompt": "请拼写「唱歌」这个英文单词：", "answer": "sing" },
+        { "type": "spell", "prompt": "请拼写「跳舞」这个英文单词：", "answer": "dance" },
+        { "type": "spell", "prompt": "请拼写「飞」这个英文单词：", "answer": "fly" },
+        { "type": "spell", "prompt": "请拼写「公园」这个英文单词：", "answer": "park" },
+        { "type": "spell", "prompt": "请拼写「家」这个英文单词：", "answer": "home" },
+        { "type": "spell", "prompt": "请拼写「花园」这个英文单词：", "answer": "garden" },
+        { "type": "spell", "prompt": "请拼写「商店」这个英文单词：", "answer": "shop" },
+        { "type": "spell", "prompt": "请拼写「桌子」这个英文单词：", "answer": "table" },
+        { "type": "spell", "prompt": "请拼写「椅子」这个英文单词：", "answer": "chair" }
       ]
     }
   }
